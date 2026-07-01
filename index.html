@@ -182,6 +182,10 @@
   .field-label{ font-weight:700; font-size:1rem; margin:0 0 10px; display:flex; align-items:center; gap:10px; }
   .field-label .num{ width:26px; height:26px; border-radius:50%; background: var(--accent-tint); color: var(--accent); display:inline-flex; align-items:center; justify-content:center; font-size:0.82rem; font-weight:800; flex:none; }
   .field-hint{ color: var(--ink-faint); font-size:0.84rem; margin:8px 0 0; }
+  .conf-chips{ display:flex; flex-wrap:wrap; gap:10px; }
+  .conf-chip{ background: var(--card-2); border:2px solid var(--line); color: var(--ink); border-radius:999px; padding:11px 18px; font-size:0.96rem; font-weight:700; font-family:'Plus Jakarta Sans',sans-serif; transition: transform 0.12s ease, border-color 0.15s ease, background 0.15s ease; }
+  .conf-chip:hover{ border-color: var(--accent); background: var(--accent-tint); transform: translateY(-2px); }
+  .conf-chip.selected{ border-color: var(--accent); background: var(--accent-tint); color: var(--ink); }
   .reflect-actions{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:6px; flex-wrap:wrap; }
   #reflect-status.saved{ color: var(--accent); border-color: var(--accent); }
 
@@ -198,6 +202,12 @@
   textarea{ width:100%; min-height:104px; border:2px solid var(--line); border-radius: var(--radius-sm); background: var(--card-2); padding:15px 17px; font-size:1.02rem; font-family:'Plus Jakarta Sans',sans-serif; color: var(--ink); resize:vertical; transition: border-color 0.18s ease; }
   textarea:focus{ border-color: var(--accent); }
   textarea::placeholder{ color: var(--ink-faint); }
+  .opt-list{ display:grid; gap:12px; }
+  .opt-btn{ width:100%; text-align:left; background: var(--card-2); border:2px solid var(--line); color: var(--ink); border-radius: var(--radius-sm); padding:16px 18px; font-size:1.02rem; font-weight:600; font-family:'Plus Jakarta Sans',sans-serif; display:flex; align-items:center; gap:12px; transition: transform 0.12s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease; }
+  .opt-btn::before{ content:""; width:20px; height:20px; border-radius:50%; border:2px solid var(--line-soft); flex:none; transition: all 0.15s ease; }
+  .opt-btn:hover{ border-color: var(--accent); background: var(--accent-tint); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+  .opt-btn.selected{ border-color: var(--accent); background: var(--accent-tint); }
+  .opt-btn.selected::before{ background: var(--accent); border-color: var(--accent); box-shadow: inset 0 0 0 3px var(--card); }
   .survey-actions{ display:flex; justify-content:space-between; align-items:center; margin-top:22px; gap:12px; }
   .btn{ border-radius:999px; padding:12px 24px; font-weight:800; font-size:0.96rem; border:2px solid transparent; display:inline-flex; align-items:center; gap:8px; transition: transform 0.12s ease, box-shadow 0.18s ease, background 0.18s ease, filter 0.18s ease; }
   .btn:active{ transform: scale(0.96); }
@@ -390,7 +400,7 @@
           <svg width="120" height="90" viewBox="0 0 120 90"><rect x="22" y="20" width="76" height="54" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="2.5"/><line x1="34" y1="36" x2="86" y2="36" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/><line x1="34" y1="48" x2="78" y2="48" stroke="var(--ink-faint)" stroke-width="3" stroke-linecap="round" opacity="0.5"/><line x1="34" y1="58" x2="70" y2="58" stroke="var(--ink-faint)" stroke-width="3" stroke-linecap="round" opacity="0.5"/><path d="M92 14 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3 Z" fill="var(--gold)"/></svg>
         </div>
         <h3>Before We Begin</h3>
-        <p>Seven quick prompts to get your head in the room before class starts. No wrong answers.</p>
+        <p>A few quick questions to get your head in the room before class — mostly just tap to answer.</p>
         <button class="tile-cta" onclick="goTo('survey')">Start warm-up
           <svg class="arr" width="14" height="14" viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -438,7 +448,7 @@
         </div>
         <div class="tile-body">
           <h3>After Class</h3>
-          <p>Take a minute to reflect — what you learned, and any notes just for you. Choose to save them on this device, or download to keep.</p>
+          <p>Take a minute to reflect — what you learned, how confident you feel, and any questions. Save a copy or submit to your teacher.</p>
           <button class="tile-cta" onclick="goTo('reflect')">Open reflection
             <svg class="arr" width="14" height="14" viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
@@ -455,9 +465,9 @@
     </div>
     <div class="flagline" id="survey-flagline"></div>
     <div class="stage-card">
-      <div class="q-eyebrow eyebrow" id="survey-eyebrow">QUESTION 1 OF 7</div>
-      <div class="q-text" id="survey-question">I want to become...</div>
-      <textarea id="survey-input" placeholder="Type your answer here..." aria-label="Your answer"></textarea>
+      <div class="q-eyebrow eyebrow" id="survey-eyebrow">QUESTION 1</div>
+      <div class="q-text" id="survey-question"></div>
+      <div id="survey-body"></div>
       <div class="survey-actions">
         <div class="secondary-actions">
           <button class="btn btn-ghost" id="survey-back-btn" onclick="surveyBack()">Back</button>
@@ -617,9 +627,23 @@
       </div>
 
       <div class="field-block">
-        <p class="field-label"><span class="num">2</span> My notes <span style="font-weight:500; color:var(--ink-faint); font-size:0.85rem;">(just for you)</span></p>
-        <textarea id="reflect-notes" placeholder="Anything else on your mind — thoughts, questions, reminders..." style="min-height:140px;" aria-label="My personal notes"></textarea>
-        <p class="field-hint">These notes are private — they stay in your browser and are only saved if you tap Save.</p>
+        <p class="field-label"><span class="num">2</span> How confident do you feel spotting red &amp; green flags now?</p>
+        <div class="conf-chips" id="conf-chips">
+          <button type="button" class="conf-chip" data-val="Very confident" onclick="selectConf(this)">💪 Very</button>
+          <button type="button" class="conf-chip" data-val="Somewhat confident" onclick="selectConf(this)">🙂 Somewhat</button>
+          <button type="button" class="conf-chip" data-val="A little" onclick="selectConf(this)">🤏 A little</button>
+          <button type="button" class="conf-chip" data-val="Not yet" onclick="selectConf(this)">🌱 Not yet</button>
+        </div>
+      </div>
+
+      <div class="field-block">
+        <p class="field-label"><span class="num">3</span> One change I'll make</p>
+        <textarea id="reflect-change" placeholder="One thing I'll do differently in my own relationships..." aria-label="One change I'll make"></textarea>
+      </div>
+
+      <div class="field-block">
+        <p class="field-label"><span class="num">4</span> Any questions or thoughts?</p>
+        <textarea id="reflect-notes" placeholder="Something you're still wondering about, or anything you'd like to share with your teacher..." style="min-height:120px;" aria-label="Questions or thoughts"></textarea>
       </div>
 
       <div class="reflect-actions">
@@ -662,13 +686,11 @@
 <script>
   // ---------------- DATA ----------------
   const surveyQuestions = [
-    { q: "I want to become...", ph: "an engineer, a nurse, a chef..." },
-    { q: "I want to travel to...", ph: "Japan, New York, the mountains..." },
-    { q: "One goal after high school...", ph: "college, a trade program, a job I love..." },
-    { q: "One thing I'm excited about...", ph: "" },
-    { q: "One thing I hope to learn today...", ph: "" },
-    { q: "One thing I already know about Teen Pregnancy Prevention...", ph: "" },
-    { q: "How can I create healthy relationships...", ph: "" }
+    { type:'choice', q: "How are you feeling about class today?", options:["😃 Excited","🤔 Curious","😴 Tired","😐 Not sure"] },
+    { type:'choice', q: "After high school, I'm most interested in…", options:["College","A trade or training","Getting a job","Still figuring it out"] },
+    { type:'choice', q: "What matters most to you in a relationship?", options:["Trust","Respect","Good communication","Feeling supported"] },
+    { type:'choice', q: "How much do you know about healthy relationships so far?", options:["A lot","Some","A little","Not much yet"] },
+    { type:'text',   q: "One thing I hope to learn today…", ph: "Optional — a few words is plenty." }
   ];
   const flagItemsBase = [
     // ---- core greens ----
@@ -816,12 +838,41 @@
   // Google Apps Script Web App URL below. When set, Save also POSTs the data.
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbztqMJZ1BtTpVavoXQpqDQyrCzCTlLrydKh9WtJJoRNddJ8UrXC0nXAMSf3jN0EiHfK7w/exec";
 
+  let reflectConf = '';
+  function selectConf(el){
+    reflectConf = el.getAttribute('data-val');
+    document.querySelectorAll('#conf-chips .conf-chip').forEach(b=>b.classList.toggle('selected', b===el));
+    sfx('click');
+  }
+  function setConfUI(val){
+    reflectConf = val || '';
+    document.querySelectorAll('#conf-chips .conf-chip').forEach(b=>b.classList.toggle('selected', b.getAttribute('data-val')===val));
+  }
+  function readReflect(){
+    return {
+      learned: document.getElementById('reflect-learned').value.trim(),
+      conf: reflectConf,
+      change: document.getElementById('reflect-change').value.trim(),
+      notes: document.getElementById('reflect-notes').value.trim()
+    };
+  }
+  function hasAnyReflect(r){ return !!(r.learned || r.conf || r.change || r.notes); }
+  function persistReflect(r){
+    try{
+      localStorage.setItem('hr-reflect-learned', r.learned);
+      localStorage.setItem('hr-reflect-conf', r.conf);
+      localStorage.setItem('hr-reflect-change', r.change);
+      localStorage.setItem('hr-reflect-notes', r.notes);
+    }catch(e){}
+  }
   function loadReflect(){
     try{
       document.getElementById('reflect-learned').value = localStorage.getItem('hr-reflect-learned') || '';
+      document.getElementById('reflect-change').value  = localStorage.getItem('hr-reflect-change')  || '';
       document.getElementById('reflect-notes').value   = localStorage.getItem('hr-reflect-notes')   || '';
+      setConfUI(localStorage.getItem('hr-reflect-conf') || '');
     }catch(e){}
-    const saved = (function(){ try{ return !!(localStorage.getItem('hr-reflect-learned')||localStorage.getItem('hr-reflect-notes')); }catch(e){ return false; } })();
+    const saved = (function(){ try{ return !!(localStorage.getItem('hr-reflect-learned')||localStorage.getItem('hr-reflect-notes')||localStorage.getItem('hr-reflect-conf')||localStorage.getItem('hr-reflect-change')); }catch(e){ return false; } })();
     setReflectStatus(saved ? 'Saved on this device' : 'Not saved yet', saved);
   }
   function setReflectStatus(text, saved){
@@ -831,32 +882,24 @@
   // Save a private copy on this device only (does NOT send anywhere)
   function saveReflect(){
     sfx('click');
-    const learned=document.getElementById('reflect-learned').value.trim();
-    const notes=document.getElementById('reflect-notes').value.trim();
-    if(!learned && !notes){ setReflectStatus('Nothing to save yet', false); return; }
-    try{
-      localStorage.setItem('hr-reflect-learned', learned);
-      localStorage.setItem('hr-reflect-notes', notes);
-    }catch(e){}
+    const r=readReflect();
+    if(!hasAnyReflect(r)){ setReflectStatus('Nothing to save yet', false); return; }
+    persistReflect(r);
     setReflectStatus('Saved on this device', true);
   }
 
   // Submit to the teacher (sends to the Google Sheet) + saves locally + shows confirmation
   function submitReflect(){
     sfx('click');
-    const learned=document.getElementById('reflect-learned').value.trim();
-    const notes=document.getElementById('reflect-notes').value.trim();
-    if(!learned && !notes){ setReflectStatus('Write something first', false); return; }
-    try{
-      localStorage.setItem('hr-reflect-learned', learned);
-      localStorage.setItem('hr-reflect-notes', notes);
-    }catch(e){}
+    const r=readReflect();
+    if(!hasAnyReflect(r)){ setReflectStatus('Answer something first', false); return; }
+    persistReflect(r);
     setReflectStatus('Submitted ✓', true);
-    sendToAppsScript(learned, notes); // posts to APPS_SCRIPT_URL if set
-    const recap=document.getElementById('reflect-recap');
-    recap.innerHTML =
-      `<li><span class="recap-q">What I learned today</span><span class="recap-a ${learned?'':'empty'}">${learned?escapeHtml(learned):'(left blank)'}</span></li>` +
-      `<li><span class="recap-q">My notes</span><span class="recap-a ${notes?'':'empty'}">${notes?escapeHtml(notes):'(left blank)'}</span></li>`;
+    sendToAppsScript(r);
+    const row=(q,a)=>`<li><span class="recap-q">${q}</span><span class="recap-a ${a?'':'empty'}">${a?escapeHtml(a):'(left blank)'}</span></li>`;
+    document.getElementById('reflect-recap').innerHTML =
+      row('What I learned today', r.learned) + row('How confident I feel', r.conf) +
+      row("One change I'll make", r.change) + row('Questions / thoughts', r.notes);
     document.getElementById('reflect-end-title').textContent = 'Submitted! 🎉';
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     document.getElementById('screen-reflect-end').classList.add('active');
@@ -865,21 +908,24 @@
   function clearReflect(){
     sfx('click');
     document.getElementById('reflect-learned').value='';
+    document.getElementById('reflect-change').value='';
     document.getElementById('reflect-notes').value='';
-    try{ localStorage.removeItem('hr-reflect-learned'); localStorage.removeItem('hr-reflect-notes'); }catch(e){}
+    setConfUI('');
+    try{ ['hr-reflect-learned','hr-reflect-conf','hr-reflect-change','hr-reflect-notes'].forEach(k=>localStorage.removeItem(k)); }catch(e){}
     setReflectStatus('Cleared', false);
     document.getElementById('reflect-learned').focus();
   }
   function downloadReflect(){
     sfx('click');
-    const learned=document.getElementById('reflect-learned').value.trim();
-    const notes=document.getElementById('reflect-notes').value.trim();
+    const r=readReflect();
     const d=new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
     const text=`Healthy Relationships — My Reflection\n`+
       (studentName?`Name: ${studentName}\n`:'')+
       `${d}\n\n`+
-      `WHAT I LEARNED TODAY\n${learned||'(left blank)'}\n\n`+
-      `MY NOTES\n${notes||'(left blank)'}\n`;
+      `WHAT I LEARNED TODAY\n${r.learned||'(left blank)'}\n\n`+
+      `HOW CONFIDENT I FEEL\n${r.conf||'(not chosen)'}\n\n`+
+      `ONE CHANGE I'LL MAKE\n${r.change||'(left blank)'}\n\n`+
+      `QUESTIONS / THOUGHTS\n${r.notes||'(left blank)'}\n`;
     const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
     const a=document.createElement('a');
     a.href=URL.createObjectURL(blob);
@@ -898,8 +944,8 @@
       });
     }catch(e){}
   }
-  function sendToAppsScript(learned, notes){
-    postToSheet({ type:'reflection', name:studentName, learned:learned, notes:notes, ts:new Date().toISOString() });
+  function sendToAppsScript(r){
+    postToSheet({ type:'reflection', name:studentName, learned:r.learned, confidence:r.conf, change:r.change, notes:r.notes, ts:new Date().toISOString() });
   }
   function submitWarmup(){
     sfx('click');
@@ -920,15 +966,33 @@
     const item=surveyQuestions[surveyIndex];
     document.getElementById('survey-eyebrow').textContent=`QUESTION ${surveyIndex+1} OF ${surveyQuestions.length}`;
     document.getElementById('survey-question').textContent=item.q;
-    document.getElementById('survey-input').value=surveyAnswers[surveyIndex]||'';
-    document.getElementById('survey-input').placeholder=item.ph||'Type your answer here...';
     document.getElementById('survey-counter').textContent=`${surveyIndex+1} / ${surveyQuestions.length}`;
     document.getElementById('survey-back-btn').style.visibility=surveyIndex===0?'hidden':'visible';
     document.getElementById('survey-next-btn').textContent=(surveyIndex===surveyQuestions.length-1)?'Finish':'Next';
+    const body=document.getElementById('survey-body');
+    if(item.type==='choice'){
+      const cur=surveyAnswers[surveyIndex]||'';
+      body.innerHTML='<div class="opt-list">'+item.options.map((o,idx)=>
+        `<button type="button" class="opt-btn${cur===o?' selected':''}" onclick="selectOption(${idx})">${escapeHtml(o)}</button>`).join('')+'</div>';
+    } else {
+      body.innerHTML=`<textarea id="survey-input" placeholder="${escapeHtml(item.ph||'Type your answer here...')}" aria-label="Your answer"></textarea>`;
+      const ta=document.getElementById('survey-input');
+      ta.value=surveyAnswers[surveyIndex]||'';
+      ta.addEventListener('keydown', function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); surveyNext(); } });
+      ta.focus();
+    }
     buildFlagline('survey-flagline',surveyQuestions.length,surveyIndex,surveyAnswers.map((a,i)=>i<surveyIndex?'neutral':null));
-    document.getElementById('survey-input').focus();
   }
-  function stashSurveyAnswer(){ surveyAnswers[surveyIndex]=document.getElementById('survey-input').value.trim(); }
+  function selectOption(idx){
+    const item=surveyQuestions[surveyIndex];
+    surveyAnswers[surveyIndex]=item.options[idx];
+    sfx('click');
+    document.querySelectorAll('#survey-body .opt-btn').forEach((b,i)=>b.classList.toggle('selected', i===idx));
+    setTimeout(function(){
+      if(surveyIndex<surveyQuestions.length-1){ surveyIndex++; renderSurvey(); } else { finishSurvey(); }
+    }, 280);
+  }
+  function stashSurveyAnswer(){ const ta=document.getElementById('survey-input'); if(ta){ surveyAnswers[surveyIndex]=ta.value.trim(); } }
   function surveyNext(){ sfx('click'); stashSurveyAnswer(); if(surveyIndex<surveyQuestions.length-1){ surveyIndex++; renderSurvey(); } else { finishSurvey(); } }
   function surveySkip(){ surveyAnswers[surveyIndex]=surveyAnswers[surveyIndex]||''; surveyNext(); }
   function surveyBack(){ sfx('click'); stashSurveyAnswer(); if(surveyIndex>0){ surveyIndex--; renderSurvey(); } }
@@ -1100,7 +1164,6 @@
     document.getElementById('recap-ul').innerHTML = healthyTraits.map(t=>`<li>${HEART}<span><b>${t[0]}</b> — ${t[1]}</span></li>`).join('');
     try{ const savedName=localStorage.getItem('hr-name'); if(savedName){ studentName=savedName; document.getElementById('student-name').value=savedName; } }catch(e){}
     document.getElementById('student-name').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); beginApp(); } });
-    document.getElementById('survey-input').addEventListener('keydown', function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); surveyNext(); } });
     document.addEventListener('pointerdown', function once(){ ac(); document.removeEventListener('pointerdown', once); }, { once:true });
   })();
 </script>
