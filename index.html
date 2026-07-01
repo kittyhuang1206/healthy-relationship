@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Healthy Relationships — Class Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* =================== THEME TOKENS =================== */
+  :root, [data-theme="dark"]{
+    --bg-base:#11140F;
+    --bg-glow-1: rgba(74,222,128,0.16);
+    --bg-glow-2: rgba(255,143,177,0.16);
+    --card:#1A1E18;
+    --card-2:#222721;
+    --ink:#F4F7F0;
+    --ink-soft:#AEB7A6;
+    --ink-faint:#727A6B;
+    --line:#2E342A;
+    --line-soft:#262B23;
+
+    --accent:#4ADE80;        /* green — growth & health */
+    --accent-2:#FF8FB1;      /* pink — care & love */
+    --accent-ink:#07260F;
+    --accent-tint: rgba(74,222,128,0.14);
+    --accent-glow: rgba(74,222,128,0.32);
+
+    --green:#4ADE80;
+    --green-tint: rgba(74,222,128,0.13);
+    --pink:#FF8FB1;
+    --pink-tint: rgba(255,143,177,0.14);
+    --red:#FF6B6B;
+    --red-tint: rgba(255,107,107,0.13);
+    --gold:#FFD66B;
+    --gold-tint: rgba(255,214,107,0.14);
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.4), 0 6px 18px rgba(0,0,0,0.28);
+    --shadow:    0 4px 10px rgba(0,0,0,0.35), 0 20px 50px rgba(0,0,0,0.45);
+    --shadow-lg: 0 8px 18px rgba(0,0,0,0.4), 0 34px 80px rgba(0,0,0,0.55);
+    --radius: 26px;
+    --radius-sm: 16px;
+  }
+  [data-theme="light"]{
+    --bg-base:#F4FBF3;
+    --bg-glow-1: rgba(43,182,115,0.18);
+    --bg-glow-2: rgba(255,143,177,0.20);
+    --card:#FFFFFF;
+    --card-2:#F7FBF5;
+    --ink:#1C2418;
+    --ink-soft:#5C6655;
+    --ink-faint:#9BA593;
+    --line:#E4EFDF;
+    --line-soft:#EFF6EC;
+
+    --accent:#2BB673;
+    --accent-2:#E86A9B;
+    --accent-ink:#FFFFFF;
+    --accent-tint: rgba(43,182,115,0.12);
+    --accent-glow: rgba(43,182,115,0.30);
+
+    --green:#16A34A;
+    --green-tint: rgba(22,163,74,0.12);
+    --pink:#E86A9B;
+    --pink-tint: rgba(232,106,155,0.12);
+    --red:#E5564E;
+    --red-tint: rgba(229,86,78,0.12);
+    --gold:#E0A92B;
+    --gold-tint: rgba(224,169,43,0.14);
+
+    --shadow-sm: 0 1px 2px rgba(35,58,32,0.05), 0 4px 14px rgba(35,58,32,0.06);
+    --shadow:    0 2px 4px rgba(35,58,32,0.05), 0 14px 34px rgba(52,160,92,0.10);
+    --shadow-lg: 0 6px 12px rgba(35,58,32,0.07), 0 24px 60px rgba(52,160,92,0.16);
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:
+      radial-gradient(1100px 560px at 10% -10%, var(--bg-glow-1) 0%, rgba(0,0,0,0) 60%),
+      radial-gradient(950px 540px at 108% 2%, var(--bg-glow-2) 0%, rgba(0,0,0,0) 55%),
+      var(--bg-base);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.4s ease, color 0.3s ease;
+  }
+  h1,h2,h3{ font-family: 'Fraunces', serif; font-weight: 600; margin: 0; letter-spacing: -0.015em; }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color: var(--accent); }
+  button{ font-family: 'Plus Jakarta Sans', sans-serif; cursor:pointer; }
+  button:focus-visible, textarea:focus-visible, a:focus-visible{ outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  /* =================== TOP CONTROLS =================== */
+  .controls{ position: fixed; top: 16px; right: 16px; z-index: 50; display:flex; gap:10px; }
+  .ctrl-btn{ width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background: var(--card-2); display:flex; align-items:center; justify-content:center; box-shadow: var(--shadow-sm); color: var(--accent); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .ctrl-btn:hover{ transform: translateY(-2px); box-shadow: var(--shadow); }
+  .ctrl-btn:active{ transform: scale(0.92); }
+
+  .app{ max-width: 760px; margin: 0 auto; padding: clamp(24px,5vw,56px) clamp(16px,5vw,24px) 80px; position:relative; z-index:1; }
+  .screen{ display:none; }
+  .screen.active{ display:block; animation: rise 0.42s cubic-bezier(.2,.8,.2,1); }
+  @keyframes rise{ from{ opacity:0; transform: translateY(12px);} to{ opacity:1; transform: translateY(0);} }
+  @keyframes pop{ 0%{ transform: scale(0.85); opacity:0;} 60%{ transform: scale(1.05);} 100%{ transform: scale(1); opacity:1;} }
+  @keyframes floaty{ 0%,100%{ transform: translateY(0) rotate(var(--r,0deg)); } 50%{ transform: translateY(-14px) rotate(var(--r,0deg)); } }
+  @keyframes beat{ 0%,100%{ transform: scale(1);} 14%{ transform: scale(1.12);} 28%{ transform: scale(1);} 42%{ transform: scale(1.12);} 56%{ transform: scale(1);} }
+  @keyframes spin-slow{ to{ transform: rotate(360deg);} }
+  @media (prefers-reduced-motion: reduce){ .screen.active{ animation:none;} *{ transition:none !important; animation-duration:0.001s !important; } }
+
+  /* =================== FLOATING HEART BACKDROP =================== */
+  .float-hearts{ position: fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+  .float-hearts svg{ position:absolute; opacity:0.10; animation: floaty 7s ease-in-out infinite; }
+  [data-theme="light"] .float-hearts svg{ opacity:0.14; }
+
+  /* =================== INTRO / LANDING =================== */
+  .intro{ text-align:center; padding-top: 6px; }
+  .hero-art{ display:flex; justify-content:center; margin: 4px 0 22px; }
+  .hero-art svg{ width: clamp(220px, 64vw, 300px); height:auto; filter: drop-shadow(0 18px 36px rgba(0,0,0,0.30)); }
+  .intro-badge{ display:inline-flex; align-items:center; gap:8px; background: var(--accent-tint); color: var(--accent); font-weight:700; font-size:0.78rem; letter-spacing:0.02em; padding:7px 15px; border-radius:999px; margin-bottom:18px; border:1px solid var(--line); }
+  .intro h1{ font-size: clamp(2.4rem, 8.5vw, 3.6rem); line-height:1.02; margin-bottom:14px; }
+  .intro h1 .accent{ background: linear-gradient(110deg, var(--accent), var(--accent-2)); -webkit-background-clip:text; background-clip:text; color: transparent; }
+  .intro p.tagline{ color: var(--ink-soft); font-size: 1.08rem; max-width: 460px; margin: 0 auto 26px; line-height:1.6; }
+  .chips{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom: 30px; }
+  .chip{ display:inline-flex; align-items:center; gap:7px; background: var(--card); border:1px solid var(--line); color: var(--ink-soft); font-size:0.84rem; font-weight:600; padding:9px 14px; border-radius:999px; box-shadow: var(--shadow-sm); }
+  .chip svg{ flex:none; }
+  .name-field{ max-width: 380px; margin: 0 auto 22px; text-align:left; }
+  .name-field label{ display:block; font-weight:700; font-size:0.92rem; margin:0 0 8px; color: var(--ink); text-align:center; }
+  .name-field input{ width:100%; border:2px solid var(--line); border-radius:999px; background: var(--card); padding:14px 20px; font-size:1.02rem; font-family:'Plus Jakarta Sans',sans-serif; color: var(--ink); text-align:center; transition: border-color 0.18s ease, box-shadow 0.18s ease; }
+  .name-field input:focus{ outline:none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-tint); }
+  .name-field input::placeholder{ color: var(--ink-faint); }
+  .name-field.shake input{ border-color: var(--red); animation: shake 0.4s; }
+  .name-hint{ text-align:center; color: var(--red); font-size:0.84rem; min-height:1em; margin:8px 0 0; }
+  @keyframes shake{ 0%,100%{ transform:translateX(0);} 20%,60%{ transform:translateX(-6px);} 40%,80%{ transform:translateX(6px);} }
+  .begin-btn{ border:none; border-radius:999px; padding:17px 38px; font-weight:800; font-size:1.08rem; color: var(--accent-ink); background: linear-gradient(110deg, var(--accent), var(--accent-2)); box-shadow: 0 12px 34px var(--accent-glow); display:inline-flex; align-items:center; gap:11px; transition: transform 0.14s ease, box-shadow 0.2s ease, filter 0.2s ease; }
+  .begin-btn:hover{ transform: translateY(-3px); filter: brightness(1.05); box-shadow: 0 18px 44px var(--accent-glow); }
+  .begin-btn:active{ transform: scale(0.97); }
+  .begin-btn .bh{ animation: beat 1.6s ease-in-out infinite; transform-origin:center; }
+  .intro-hint{ margin-top: 16px; color: var(--ink-faint); font-size: 0.84rem; }
+
+  /* =================== PENNANT PROGRESS =================== */
+  .flagline{ display:flex; padding: 6px 4px 0; margin-bottom: 26px; }
+  .flagline .pole-row{ display:flex; width:100%; position:relative; }
+  .flagline .wire{ position:absolute; top:8px; left:0; right:0; height:2px; background: var(--line); border-radius:2px; }
+  .pennant-wrap{ flex:1; display:flex; flex-direction:column; align-items:center; position:relative; z-index:1; }
+  .pennant{ width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-top:15px solid var(--line); margin-top:2px; transition: border-top-color 0.35s ease, transform 0.35s ease; }
+  .pennant.done.green{ border-top-color: var(--green); }
+  .pennant.done.red{ border-top-color: var(--red); }
+  .pennant.done.neutral{ border-top-color: var(--accent); }
+  .pennant-wrap.current .pennant{ transform: scale(1.18); }
+  .pennant-dot{ position:absolute; top:-3px; left:50%; transform:translateX(-50%); width:9px; height:9px; border-radius:50%; background: var(--card); border:2px solid var(--line); transition: all 0.3s ease; }
+  .pennant-wrap.current .pennant-dot{ border-color: var(--accent); background: var(--accent); transform: translateX(-50%) scale(1.25); box-shadow: 0 0 0 5px var(--accent-glow); }
+
+  /* =================== HOME MENU =================== */
+  .menu-head{ text-align:center; margin: 2px 0 28px; }
+  .menu-head h2{ font-size: clamp(1.7rem,5.5vw,2.2rem); margin-bottom:8px; }
+  .menu-head p{ color: var(--ink-soft); font-size:1rem; margin:0; }
+  .tiles{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media (max-width:560px){ .tiles{ grid-template-columns:1fr; } }
+  .tile{ position:relative; overflow:hidden; background: var(--card); border:1px solid var(--line); border-radius: var(--radius); padding:26px 24px; text-align:left; box-shadow: var(--shadow); transition: transform 0.2s cubic-bezier(.2,.8,.2,1), box-shadow 0.2s ease, border-color 0.2s ease; display:flex; flex-direction:column; gap:14px; height:100%; }
+  .tile::after{ content:""; position:absolute; inset:0 0 auto 0; height:4px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); opacity:0; transition:opacity 0.2s ease; }
+  .tile:hover{ transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+  .tile:hover::after{ opacity:1; }
+  .tile-illu{ width:100%; height:120px; border-radius: var(--radius-sm); display:flex; align-items:center; justify-content:center; margin-bottom:2px; }
+  .tile.tile-a .tile-illu{ background: linear-gradient(150deg, var(--accent-tint), var(--gold-tint)); }
+  .tile.tile-b .tile-illu{ background: linear-gradient(150deg, var(--green-tint), var(--pink-tint)); }
+  .tile h3{ font-size:1.34rem; }
+  .tile p{ color: var(--ink-soft); font-size:0.95rem; line-height:1.5; margin:0; flex-grow:1; }
+  .tile-cta{ align-self:flex-start; background:none; border:none; color: var(--accent); font-weight:800; font-size:0.95rem; padding:0; display:flex; align-items:center; gap:7px; }
+  .tile-cta svg.arr{ transition: transform 0.18s ease; }
+  .tile:hover .tile-cta svg.arr{ transform: translateX(4px); }
+  .tile.tile-c .tile-illu{ background: linear-gradient(150deg, var(--pink-tint), var(--gold-tint)); }
+  .tile.full{ grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 24px; }
+  .tile.full .tile-illu{ width: 150px; height: 96px; flex:none; margin:0; }
+  .tile.full .tile-body{ display:flex; flex-direction:column; gap:10px; }
+  @media (max-width:560px){ .tile.full{ flex-direction:column; align-items:flex-start; } .tile.full .tile-illu{ width:100%; } }
+
+  /* reflection fields */
+  .field-block{ margin-bottom: 22px; }
+  .field-label{ font-weight:700; font-size:1rem; margin:0 0 10px; display:flex; align-items:center; gap:10px; }
+  .field-label .num{ width:26px; height:26px; border-radius:50%; background: var(--accent-tint); color: var(--accent); display:inline-flex; align-items:center; justify-content:center; font-size:0.82rem; font-weight:800; flex:none; }
+  .field-hint{ color: var(--ink-faint); font-size:0.84rem; margin:8px 0 0; }
+  .reflect-actions{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:6px; flex-wrap:wrap; }
+  #reflect-status.saved{ color: var(--accent); border-color: var(--accent); }
+
+  /* =================== SHARED =================== */
+  .top-nav{ display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+  .back-link{ background: var(--card-2); border:1px solid var(--line); color: var(--ink-soft); font-size:0.88rem; font-weight:600; display:flex; align-items:center; gap:6px; padding:8px 15px; border-radius:999px; box-shadow: var(--shadow-sm); transition: transform 0.15s ease, color 0.15s ease; }
+  .back-link:hover{ color: var(--ink); transform: translateX(-2px); }
+  .stage-card{ background: var(--card); border:1px solid var(--line); border-radius: var(--radius); padding: clamp(26px,5vw,40px); box-shadow: var(--shadow); }
+  .score-pill{ font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color: var(--ink-soft); background: var(--card-2); border:1px solid var(--line); padding:6px 12px; border-radius:999px; }
+
+  /* =================== SURVEY =================== */
+  .q-eyebrow{ margin-bottom:12px; }
+  .q-text{ font-size: clamp(1.4rem,4.5vw,1.85rem); line-height:1.25; margin-bottom:22px; }
+  textarea{ width:100%; min-height:104px; border:2px solid var(--line); border-radius: var(--radius-sm); background: var(--card-2); padding:15px 17px; font-size:1.02rem; font-family:'Plus Jakarta Sans',sans-serif; color: var(--ink); resize:vertical; transition: border-color 0.18s ease; }
+  textarea:focus{ border-color: var(--accent); }
+  textarea::placeholder{ color: var(--ink-faint); }
+  .survey-actions{ display:flex; justify-content:space-between; align-items:center; margin-top:22px; gap:12px; }
+  .btn{ border-radius:999px; padding:12px 24px; font-weight:800; font-size:0.96rem; border:2px solid transparent; display:inline-flex; align-items:center; gap:8px; transition: transform 0.12s ease, box-shadow 0.18s ease, background 0.18s ease, filter 0.18s ease; }
+  .btn:active{ transform: scale(0.96); }
+  .btn-primary{ background: linear-gradient(110deg, var(--accent), var(--accent-2)); color: var(--accent-ink); box-shadow: 0 8px 24px var(--accent-glow); }
+  .btn-primary:hover{ filter: brightness(1.06); box-shadow: 0 10px 30px var(--accent-glow); }
+  .btn-primary:disabled{ background: var(--line); color: var(--ink-faint); box-shadow:none; cursor:not-allowed; }
+  .btn-ghost{ background: var(--card-2); color: var(--ink-soft); border-color: var(--line); }
+  .btn-ghost:hover{ color: var(--ink); border-color: var(--accent); }
+  .secondary-actions{ display:flex; gap:10px; }
+
+  .recap-list{ list-style:none; margin:18px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; text-align:left; }
+  .recap-list li{ background: var(--card-2); border:1px solid var(--line); border-radius: var(--radius-sm); padding:13px 15px; font-size:0.93rem; }
+  .recap-list .recap-q{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color: var(--accent); display:block; margin-bottom:4px; }
+  .recap-list .recap-a{ color: var(--ink); }
+  .recap-list .recap-a.empty{ color: var(--ink-faint); font-style:italic; }
+
+  /* =================== FLAG SORT =================== */
+  .flag-card{ text-align:center; }
+  .flag-card .q-eyebrow{ text-align:left; margin-bottom:10px; }
+  .flag-statement{ font-size: clamp(1.35rem,4.5vw,1.7rem); line-height:1.35; margin:12px 0 30px; font-family:'Fraunces',serif; font-weight:500; }
+  .flag-choices{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:480px){ .flag-choices{ grid-template-columns:1fr; } }
+  .flag-choice{ border-radius: var(--radius-sm); padding:22px 14px; font-weight:800; font-size:1.05rem; display:flex; flex-direction:column; align-items:center; gap:12px; border:2px solid var(--line); background: var(--card-2); color: var(--ink); transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease; }
+  .flag-choice:hover{ transform: translateY(-3px); box-shadow: var(--shadow); }
+  .flag-choice.red:hover{ border-color: var(--red); background: var(--red-tint); }
+  .flag-choice.green:hover{ border-color: var(--green); background: var(--green-tint); }
+  .flag-choice .pennant-icon{ width:0; height:0; border-left:11px solid transparent; border-right:11px solid transparent; }
+  .flag-choice.red .pennant-icon{ border-top:19px solid var(--red); }
+  .flag-choice.green .pennant-icon{ border-top:19px solid var(--green); }
+  .flag-choice:disabled{ opacity:0.4; cursor:not-allowed; transform:none; box-shadow:none; }
+  .flag-choice.chosen{ transform: scale(1.02); }
+  .flag-choice.chosen.green{ border-color: var(--green); background: var(--green-tint); }
+  .flag-choice.chosen.red{ border-color: var(--red); background: var(--red-tint); }
+
+  /* generic choices (Myth or Fact, Boundary Sort) */
+  .choices-2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .choices-3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+  @media (max-width:520px){ .choices-3{ grid-template-columns:1fr; } }
+  @media (max-width:440px){ .choices-2{ grid-template-columns:1fr; } }
+  .choice{ border-radius: var(--radius-sm); padding:22px 14px; font-weight:800; font-size:1.02rem; display:flex; flex-direction:column; align-items:center; gap:10px; border:2px solid var(--line); background: var(--card-2); color: var(--ink); transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease; }
+  .choice:hover{ transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--accent); background: var(--accent-tint); }
+  .choice.c-ok:hover, .choice.c-ok.pick{ border-color: var(--green); background: var(--green-tint); }
+  .choice.c-no:hover, .choice.c-no.pick{ border-color: var(--red); background: var(--red-tint); }
+  .choice.c-me:hover, .choice.c-me.pick{ border-color: var(--gold); background: var(--gold-tint); }
+  .choice.c-fact:hover, .choice.c-fact.pick{ border-color: var(--green); background: var(--green-tint); }
+  .choice.c-myth:hover, .choice.c-myth.pick{ border-color: var(--pink); background: var(--pink-tint); }
+  .choice.pick{ transform: scale(1.02); }
+  .choice:disabled{ opacity:0.42; cursor:not-allowed; transform:none; box-shadow:none; }
+
+  .feedback{ margin-top:24px; border-radius: var(--radius-sm); padding:20px 22px; text-align:left; display:none; border:1px solid transparent; }
+  .feedback.show{ display:block; animation: pop 0.42s cubic-bezier(.2,.8,.2,1); }
+  .feedback.correct{ background: var(--green-tint); border-color: var(--green); }
+  .feedback.incorrect{ background: var(--red-tint); border-color: var(--red); }
+  .feedback.neutral{ background: var(--accent-tint); border-color: var(--accent); }
+  .feedback.neutral .fb-title{ color: var(--accent); }
+  .feedback .fb-title{ font-weight:800; font-size:1rem; margin-bottom:6px; display:flex; align-items:center; gap:8px; }
+  .feedback.correct .fb-title{ color: var(--green); }
+  .feedback.incorrect .fb-title{ color: var(--red); }
+  .feedback .fb-why{ color: var(--ink-soft); font-size:0.94rem; line-height:1.5; }
+  .feedback-actions{ margin-top:18px; text-align:right; }
+
+  /* =================== END SCREENS =================== */
+  .end-screen{ text-align:center; }
+  .end-icon{ display:flex; justify-content:center; margin-bottom:16px; animation: pop 0.5s cubic-bezier(.2,.8,.2,1); }
+  .end-screen h2{ font-size: clamp(1.75rem,5.5vw,2.2rem); margin-bottom:10px; }
+  .end-screen p.lede{ color: var(--ink-soft); max-width:460px; margin:0 auto 24px; line-height:1.55; }
+  .score-ring{ display:flex; justify-content:center; margin:4px 0 22px; }
+  .score-ring .ring-num{ font-family:'Fraunces',serif; font-weight:700; }
+  .recap-box{ text-align:left; background: var(--green-tint); border:1px solid var(--green); border-radius: var(--radius-sm); padding:22px 24px; margin:0 0 22px; }
+  .recap-box h3{ font-size:1.05rem; margin-bottom:12px; color: var(--green); display:flex; align-items:center; gap:8px; }
+  .recap-box ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:9px; }
+  .recap-box li{ font-size:0.93rem; line-height:1.45; color: var(--ink); display:flex; gap:9px; align-items:flex-start; }
+  .recap-box li b{ color: var(--green); }
+  .recap-box li .lh{ flex:none; margin-top:3px; }
+  .end-actions{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+  #confetti{ position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:60; }
+
+  /* shared heart helper */
+  .hbeat{ animation: beat 1.8s ease-in-out infinite; transform-origin:center; }
+  /* for hearts inside an SVG that are positioned by a parent <g>: animate only here */
+  .beat-svg{ transform-box: fill-box; transform-origin:center; animation: beat 1.8s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<div class="float-hearts" id="float-hearts" aria-hidden="true"></div>
+
+<div class="controls">
+  <button class="ctrl-btn" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark / light">
+    <svg id="theme-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+  </button>
+  <button class="ctrl-btn" id="sound-toggle" onclick="toggleSound()" aria-label="Toggle sound" title="Toggle sound">
+    <svg id="sound-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+  </button>
+</div>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<div class="app">
+
+  <!-- ============ INTRO / LANDING ============ -->
+  <section class="screen active" id="screen-intro">
+    <div class="intro">
+      <div class="hero-art">
+        <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two overlapping hearts">
+          <defs>
+            <linearGradient id="gGreen" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="var(--green)"/><stop offset="1" stop-color="#9CF5BE"/>
+            </linearGradient>
+            <linearGradient id="gPink" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="var(--pink)"/><stop offset="1" stop-color="#FFC2D6"/>
+            </linearGradient>
+            <radialGradient id="gGlow" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="var(--gold)" stop-opacity="0.30"/><stop offset="1" stop-color="var(--gold)" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="150" cy="206" rx="84" ry="13" fill="#000" opacity="0.14"/>
+          <circle cx="150" cy="120" r="78" fill="url(#gGlow)"/>
+          <!-- left green heart (positioned by outer <g>, pulsed by inner) -->
+          <g transform="translate(56 78) rotate(-10 70 70)">
+            <g class="beat-svg">
+              <path transform="scale(5.6)" d="M12 21C12 21 4 13.7 4 8.8 4 6.1 6.1 4 8.7 4 10.3 4 11.6 4.9 12 6.1 12.4 4.9 13.7 4 15.3 4 17.9 4 20 6.1 20 8.8 20 13.7 12 21 12 21Z" fill="url(#gGreen)"/>
+            </g>
+          </g>
+          <!-- right pink heart -->
+          <g transform="translate(128 70) rotate(10 78 78)">
+            <g class="beat-svg" style="animation-delay:.35s">
+              <path transform="scale(6.1)" d="M12 21C12 21 4 13.7 4 8.8 4 6.1 6.1 4 8.7 4 10.3 4 11.6 4.9 12 6.1 12.4 4.9 13.7 4 15.3 4 17.9 4 20 6.1 20 8.8 20 13.7 12 21 12 21Z" fill="url(#gPink)"/>
+            </g>
+          </g>
+          <!-- sparkles -->
+          <g fill="var(--gold)">
+            <path d="M150 22 l4 11 11 4 -11 4 -4 11 -4 -11 -11 -4 11 -4 Z"/>
+            <circle cx="62" cy="60" r="4"/><circle cx="240" cy="74" r="5"/>
+            <circle cx="250" cy="150" r="3.5"/><circle cx="50" cy="146" r="3.5"/>
+          </g>
+          <g fill="#FFFFFF" opacity="0.92">
+            <circle cx="120" cy="104" r="5.5"/><circle cx="182" cy="100" r="4.5"/>
+          </g>
+        </svg>
+      </div>
+
+      <span class="intro-badge">✦ Healthy relationships lesson</span>
+      <h1>Healthy <span class="accent">Relationships</span></h1>
+      <p class="tagline">Warm up your mind, then play a quick game to learn how to spot the signs of a healthy — and unhealthy — relationship. 💚</p>
+
+      <div class="chips">
+        <span class="chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 21C12 21 4 13.7 4 8.8 4 6.1 6.1 4 8.7 4 10.3 4 11.6 4.9 12 6.1 12.4 4.9 13.7 4 15.3 4 17.9 4 20 6.1 20 8.8 20 13.7 12 21 12 21Z"/></svg>
+          Play · learn · reflect
+        </span>
+        <span class="chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          Private &amp; judgment-free
+        </span>
+        <span class="chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="var(--pink)"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.3 6.6L12 17.8 6.1 20.9l1.3-6.6L2.5 9.3l6.6-.7z"/></svg>
+          Real-life scenarios
+        </span>
+      </div>
+
+      <div class="name-field">
+        <label for="student-name">First, what's your name?</label>
+        <input id="student-name" type="text" maxlength="60" placeholder="Type your name to start..." autocomplete="off" aria-label="Your name" />
+        <p class="name-hint" id="name-hint"></p>
+      </div>
+
+      <button class="begin-btn" onclick="beginApp()">
+        <svg class="bh" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21C12 21 4 13.7 4 8.8 4 6.1 6.1 4 8.7 4 10.3 4 11.6 4.9 12 6.1 12.4 4.9 13.7 4 15.3 4 17.9 4 20 6.1 20 8.8 20 13.7 12 21 12 21Z"/></svg>
+        Let's begin
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ HOME MENU ============ -->
+  <section class="screen" id="screen-home">
+    <div class="top-nav">
+      <button class="back-link" onclick="goTo('intro')"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
+    </div>
+    <div class="menu-head">
+      <h2 id="menu-greeting">Choose an activity</h2>
+      <p>Start with the warm-up, or jump straight into the game.</p>
+    </div>
+    <div class="tiles">
+      <div class="tile tile-a">
+        <div class="tile-illu">
+          <svg width="120" height="90" viewBox="0 0 120 90"><rect x="22" y="20" width="76" height="54" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="2.5"/><line x1="34" y1="36" x2="86" y2="36" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/><line x1="34" y1="48" x2="78" y2="48" stroke="var(--ink-faint)" stroke-width="3" stroke-linecap="round" opacity="0.5"/><line x1="34" y1="58" x2="70" y2="58" stroke="var(--ink-faint)" stroke-width="3" stroke-linecap="round" opacity="0.5"/><path d="M92 14 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3 Z" fill="var(--gold)"/></svg>
+        </div>
+        <h3>Before We Begin</h3>
+        <p>Seven quick prompts to get your head in the room before class starts. No wrong answers.</p>
+        <button class="tile-cta" onclick="goTo('survey')">Start warm-up
+          <svg class="arr" width="14" height="14" viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="tile tile-b">
+        <div class="tile-illu">
+          <svg width="120" height="90" viewBox="0 0 120 90">
+            <line x1="34" y1="18" x2="34" y2="74" stroke="var(--green)" stroke-width="3" stroke-linecap="round"/><path d="M34 22 L64 32 L34 42 Z" fill="var(--green)"/>
+            <line x1="86" y1="18" x2="86" y2="74" stroke="var(--red)" stroke-width="3" stroke-linecap="round"/><path d="M86 24 L60 33 L86 42 Z" fill="var(--red)"/>
+            <path d="M60 60 C60 60 53 54 53 50 C53 47.5 55 46 57 46 C58.5 46 59.6 46.9 60 47.9 C60.4 46.9 61.5 46 63 46 C65 46 67 47.5 67 50 C67 54 60 60 60 60 Z" fill="var(--pink)"/>
+          </svg>
+        </div>
+        <h3>Spot the Flag</h3>
+        <p>Thirteen real relationship behaviors. Decide: green flag, or red flag — and find out why it matters.</p>
+        <button class="tile-cta" onclick="goTo('flags')">Play the game
+          <svg class="arr" width="14" height="14" viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="tile tile-d">
+        <div class="tile-illu">
+          <svg width="120" height="90" viewBox="0 0 120 90"><circle cx="60" cy="44" r="26" fill="none" stroke="var(--gold)" stroke-width="3"/><path d="M53 38 a7 7 0 1 1 9 7 c-2 1.5 -2 3 -2 5" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round"/><circle cx="60" cy="58" r="2.4" fill="var(--gold)"/><path d="M88 22 l2.5 6 6 2.5 -6 2.5 -2.5 6 -2.5 -6 -6 -2.5 6 -2.5 Z" fill="var(--green)"/><path d="M26 60 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 Z" fill="var(--pink)"/></svg>
+        </div>
+        <h3>Myth or Fact</h3>
+        <p>Bust common myths about relationships, consent, and staying safe — quick true-or-false rounds.</p>
+        <button class="tile-cta" onclick="goTo('myth')">Play Myth or Fact
+          <svg class="arr" width="14" height="14" viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="tile tile-e">
+        <div class="tile-illu">
+          <svg width="120" height="90" viewBox="0 0 120 90"><path d="M60 16 L86 26 V46 C86 62 74 72 60 78 C46 72 34 62 34 46 V26 Z" fill="none" stroke="var(--green)" stroke-width="3" stroke-linejoin="round"/><path d="M50 46 l7 7 14 -15" fill="none" stroke="var(--green)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Boundary Sort</h3>
+        <p>Sort everyday situations by how they sit with you. No wrong answers — your boundaries are yours.</p>
+        <button class="tile-cta" onclick="goTo('boundary')">Try Boundary Sort
+          <svg class="arr" width="14" height="14" viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="tile tile-c full">
+        <div class="tile-illu">
+          <svg width="120" height="90" viewBox="0 0 120 90"><rect x="26" y="16" width="68" height="60" rx="10" fill="var(--card)" stroke="var(--pink)" stroke-width="2.5"/><line x1="37" y1="32" x2="83" y2="32" stroke="var(--pink)" stroke-width="3" stroke-linecap="round"/><line x1="37" y1="44" x2="76" y2="44" stroke="var(--ink-faint)" stroke-width="3" stroke-linecap="round" opacity="0.5"/><line x1="37" y1="56" x2="70" y2="56" stroke="var(--ink-faint)" stroke-width="3" stroke-linecap="round" opacity="0.5"/><path d="M86 66 C86 66 78 59 78 54.5 C78 51.8 80 50 82.4 50 C84 50 85.3 51 86 52.3 C86.7 51 88 50 89.6 50 C92 50 94 51.8 94 54.5 C94 59 86 66 86 66 Z" fill="var(--pink)"/></svg>
+        </div>
+        <div class="tile-body">
+          <h3>After Class</h3>
+          <p>Take a minute to reflect — what you learned, and any notes just for you. Choose to save them on this device, or download to keep.</p>
+          <button class="tile-cta" onclick="goTo('reflect')">Open reflection
+            <svg class="arr" width="14" height="14" viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SURVEY ============ -->
+  <section class="screen" id="screen-survey">
+    <div class="top-nav">
+      <button class="back-link" onclick="goTo('home')"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Menu</button>
+      <span class="score-pill" id="survey-counter"></span>
+    </div>
+    <div class="flagline" id="survey-flagline"></div>
+    <div class="stage-card">
+      <div class="q-eyebrow eyebrow" id="survey-eyebrow">QUESTION 1 OF 7</div>
+      <div class="q-text" id="survey-question">I want to become...</div>
+      <textarea id="survey-input" placeholder="Type your answer here..." aria-label="Your answer"></textarea>
+      <div class="survey-actions">
+        <div class="secondary-actions">
+          <button class="btn btn-ghost" id="survey-back-btn" onclick="surveyBack()">Back</button>
+          <button class="btn btn-ghost" onclick="surveySkip()">Skip</button>
+        </div>
+        <button class="btn btn-primary" id="survey-next-btn" onclick="surveyNext()">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SURVEY END ============ -->
+  <section class="screen" id="screen-survey-end">
+    <div class="end-screen">
+      <div class="end-icon"><svg width="60" height="56" viewBox="0 0 24 24" fill="var(--gold)" class="hbeat"><path d="M12 21C12 21 4 13.7 4 8.8 4 6.1 6.1 4 8.7 4 10.3 4 11.6 4.9 12 6.1 12.4 4.9 13.7 4 15.3 4 17.9 4 20 6.1 20 8.8 20 13.7 12 21 12 21Z"/></svg></div>
+      <h2>You're warmed up. 🎉</h2>
+      <p class="lede">Nice work. Send your answers to your teacher, then dive into the game.</p>
+      <ul class="recap-list" id="survey-recap"></ul>
+      <div class="end-actions" style="margin-top:26px;">
+        <button class="btn btn-ghost" onclick="goTo('flags')">Play the flag game</button>
+        <button class="btn btn-primary" id="warmup-submit-btn" onclick="submitWarmup()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+          Submit to teacher
+        </button>
+        <button class="btn btn-ghost" onclick="goTo('home')">Menu</button>
+      </div>
+      <p class="field-hint" id="warmup-status" style="margin-top:14px;">Tap “Submit” to send your warm-up answers to your teacher.</p>
+    </div>
+  </section>
+
+  <!-- ============ FLAG SORT ============ -->
+  <section class="screen" id="screen-flags">
+    <div class="top-nav">
+      <button class="back-link" onclick="confirmExitFlags()"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Menu</button>
+      <span class="score-pill" id="flags-counter"></span>
+    </div>
+    <div class="flagline" id="flags-flagline"></div>
+    <div class="stage-card flag-card">
+      <div class="q-eyebrow eyebrow" id="flags-eyebrow">CARD 1 OF 13</div>
+      <div class="flag-statement" id="flag-statement">They value your opinions, feelings, and boundaries.</div>
+      <div class="flag-choices" id="flag-choices">
+        <button class="flag-choice red" data-choice="red" onclick="answerFlag('red')"><span class="pennant-icon"></span>Red Flag</button>
+        <button class="flag-choice green" data-choice="green" onclick="answerFlag('green')"><span class="pennant-icon"></span>Green Flag</button>
+      </div>
+      <div class="feedback" id="flag-feedback">
+        <div class="fb-title" id="fb-title"></div>
+        <div class="fb-why" id="fb-why"></div>
+        <div class="feedback-actions"><button class="btn btn-primary" id="flag-next-btn" onclick="nextFlag()">Next card</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FLAG SORT END ============ -->
+  <section class="screen" id="screen-flags-end">
+    <div class="end-screen">
+      <div class="score-ring" id="score-ring"></div>
+      <h2 id="flags-end-title">All 13 cards sorted.</h2>
+      <p class="lede" id="flags-end-score">You spotted 10 out of 13 correctly.</p>
+      <div class="recap-box">
+        <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="var(--green)"><path d="M12 21C12 21 4 13.7 4 8.8 4 6.1 6.1 4 8.7 4 10.3 4 11.6 4.9 12 6.1 12.4 4.9 13.7 4 15.3 4 17.9 4 20 6.1 20 8.8 20 13.7 12 21 12 21Z"/></svg> What healthy looks like</h3>
+        <ul id="recap-ul"></ul>
+      </div>
+      <p class="lede" style="margin-top:-4px;">Real relationships aren't perfect — but they should always have these.</p>
+      <div class="end-actions">
+        <button class="btn btn-ghost" onclick="startFlagGame(); goTo('flags')">Play again</button>
+        <button class="btn btn-ghost" onclick="goTo('reflect')">Reflect on it</button>
+        <button class="btn btn-primary" onclick="goTo('intro')">Back to start</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MYTH OR FACT ============ -->
+  <section class="screen" id="screen-myth">
+    <div class="top-nav">
+      <button class="back-link" onclick="goTo('home')"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Menu</button>
+      <span class="score-pill" id="myth-counter"></span>
+    </div>
+    <div class="flagline" id="myth-flagline"></div>
+    <div class="stage-card flag-card">
+      <div class="q-eyebrow eyebrow" id="myth-eyebrow">CARD 1 OF 12</div>
+      <div class="flag-statement" id="myth-statement"></div>
+      <div class="choices-2" id="myth-choices">
+        <button class="choice c-myth" data-choice="myth" onclick="answerMyth('myth')">🌫️ Myth</button>
+        <button class="choice c-fact" data-choice="fact" onclick="answerMyth('fact')">✅ Fact</button>
+      </div>
+      <div class="feedback" id="myth-feedback">
+        <div class="fb-title" id="myth-fb-title"></div>
+        <div class="fb-why" id="myth-fb-why"></div>
+        <div class="feedback-actions"><button class="btn btn-primary" id="myth-next-btn" onclick="nextMyth()">Next</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MYTH END ============ -->
+  <section class="screen" id="screen-myth-end">
+    <div class="end-screen">
+      <div class="score-ring" id="myth-ring"></div>
+      <h2 id="myth-end-title">Round complete.</h2>
+      <p class="lede" id="myth-end-score"></p>
+      <div class="end-actions">
+        <button class="btn btn-ghost" onclick="startMyth(); goTo('myth')">Play again</button>
+        <button class="btn btn-primary" onclick="goTo('home')">Back to menu</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BOUNDARY SORT ============ -->
+  <section class="screen" id="screen-boundary">
+    <div class="top-nav">
+      <button class="back-link" onclick="goTo('home')"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Menu</button>
+      <span class="score-pill" id="boundary-counter"></span>
+    </div>
+    <div class="flagline" id="boundary-flagline"></div>
+    <div class="stage-card flag-card">
+      <div class="q-eyebrow eyebrow" id="boundary-eyebrow">SITUATION 1 OF 10</div>
+      <div class="flag-statement" id="boundary-statement"></div>
+      <p style="color:var(--ink-soft); margin:-14px 0 26px; font-size:0.95rem;">How does this sit with you?</p>
+      <div class="choices-3" id="boundary-choices">
+        <button class="choice c-ok" data-choice="ok" onclick="chooseBoundary('ok')">👍 I'm OK with this</button>
+        <button class="choice c-no" data-choice="no" onclick="chooseBoundary('no')">🚫 Not OK</button>
+        <button class="choice c-me" data-choice="me" onclick="chooseBoundary('me')">🤔 It's my choice</button>
+      </div>
+      <div class="feedback" id="boundary-feedback">
+        <div class="fb-title" id="boundary-fb-title"></div>
+        <div class="fb-why" id="boundary-fb-why"></div>
+        <div class="feedback-actions"><button class="btn btn-primary" id="boundary-next-btn" onclick="nextBoundary()">Next</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BOUNDARY END ============ -->
+  <section class="screen" id="screen-boundary-end">
+    <div class="end-screen">
+      <div class="end-icon"><svg width="58" height="54" viewBox="0 0 120 90"><path d="M60 12 L92 24 V48 C92 66 78 78 60 84 C42 78 28 66 28 48 V24 Z" fill="none" stroke="var(--green)" stroke-width="4" stroke-linejoin="round"/><path d="M48 48 l8 8 16 -17" fill="none" stroke="var(--green)" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h2>Boundaries are personal. 💚</h2>
+      <p class="lede">There's no scoreboard here — what matters is knowing your own limits and trusting them. The only rule: no one is allowed to push past a boundary you've set.</p>
+      <div class="end-actions">
+        <button class="btn btn-ghost" onclick="startBoundary(); goTo('boundary')">Go again</button>
+        <button class="btn btn-primary" onclick="goTo('home')">Back to menu</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AFTER-CLASS REFLECTION ============ -->
+  <section class="screen" id="screen-reflect">
+    <div class="top-nav">
+      <button class="back-link" onclick="goTo('home')"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Menu</button>
+      <span class="score-pill" id="reflect-status">Not saved yet</span>
+    </div>
+    <div class="stage-card">
+      <div class="q-eyebrow eyebrow">AFTER CLASS · REFLECTION</div>
+      <h2 style="font-size:clamp(1.5rem,5vw,1.95rem); margin-bottom:6px;">Before you go 💚</h2>
+      <p style="color:var(--ink-soft); margin:0 0 22px; line-height:1.55;">Take a minute to capture what stuck with you. Nothing is saved unless you choose to.</p>
+
+      <div class="field-block">
+        <p class="field-label"><span class="num">1</span> What I learned today</p>
+        <textarea id="reflect-learned" placeholder="The biggest thing I'll remember is..." aria-label="What I learned today"></textarea>
+      </div>
+
+      <div class="field-block">
+        <p class="field-label"><span class="num">2</span> My notes <span style="font-weight:500; color:var(--ink-faint); font-size:0.85rem;">(just for you)</span></p>
+        <textarea id="reflect-notes" placeholder="Anything else on your mind — thoughts, questions, reminders..." style="min-height:140px;" aria-label="My personal notes"></textarea>
+        <p class="field-hint">These notes are private — they stay in your browser and are only saved if you tap Save.</p>
+      </div>
+
+      <div class="reflect-actions">
+        <button class="btn btn-ghost" onclick="downloadReflect()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Download
+        </button>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-ghost" onclick="clearReflect()">Clear</button>
+          <button class="btn btn-ghost" onclick="saveReflect()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+            Save for myself
+          </button>
+          <button class="btn btn-primary" onclick="submitReflect()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            Submit
+          </button>
+        </div>
+      </div>
+      <p class="field-hint" style="text-align:right; margin-top:14px;">“Save for myself” stays on this device · “Submit” sends your answers to your teacher.</p>
+    </div>
+  </section>
+
+  <!-- ============ REFLECTION END ============ -->
+  <section class="screen" id="screen-reflect-end">
+    <div class="end-screen">
+      <div class="end-icon"><svg width="60" height="56" viewBox="0 0 24 24" fill="var(--green)" class="hbeat"><path d="M12 21C12 21 4 13.7 4 8.8 4 6.1 6.1 4 8.7 4 10.3 4 11.6 4.9 12 6.1 12.4 4.9 13.7 4 15.3 4 17.9 4 20 6.1 20 8.8 20 13.7 12 21 12 21Z"/></svg></div>
+      <h2 id="reflect-end-title">Submitted! 🎉</h2>
+      <p class="lede">Thanks for sharing — your reflection was sent to your teacher, and a copy is kept on this device. You can download it to keep too.</p>
+      <ul class="recap-list" id="reflect-recap"></ul>
+      <div class="end-actions" style="margin-top:26px;">
+        <button class="btn btn-ghost" onclick="downloadReflect()">Download a copy</button>
+        <button class="btn btn-primary" onclick="goTo('intro')">Done</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // ---------------- DATA ----------------
+  const surveyQuestions = [
+    { q: "I want to become...", ph: "an engineer, a nurse, a chef..." },
+    { q: "I want to travel to...", ph: "Japan, New York, the mountains..." },
+    { q: "One goal after high school...", ph: "college, a trade program, a job I love..." },
+    { q: "One thing I'm excited about...", ph: "" },
+    { q: "One thing I hope to learn today...", ph: "" },
+    { q: "One thing I already know about Teen Pregnancy Prevention...", ph: "" },
+    { q: "How can I create healthy relationships...", ph: "" }
+  ];
+  const flagItemsBase = [
+    // ---- core greens ----
+    { type:"green", label:"Respect", statement:"They value your opinions, feelings, and boundaries.", why:"Someone who respects you cares what you think, how you feel, and where your limits are." },
+    { type:"green", label:"Honest Communication", statement:"You can talk to them openly, without fear.", why:"You shouldn't have to walk on eggshells. Honest talk means no fear and no guessing games." },
+    { type:"green", label:"Trust", statement:"You feel safe with them and don't have to constantly prove where you've been.", why:"Trust means you're not stuck defending yourself or proving yourself over and over." },
+    { type:"green", label:"Support", statement:"They encourage your goals, your education, and your dreams.", why:"A healthy partner wants you to chase your goals — not put them on hold." },
+    { type:"green", label:"Healthy Boundaries", statement:"They respect your right to say \"no.\"", why:"\"No\" is a full sentence. A good partner doesn't push back on it." },
+    { type:"green", label:"Kindness", statement:"They treat you with care, even during disagreements.", why:"Even hard conversations can happen without cruelty." },
+    // ---- more greens (nuanced & situational) ----
+    { type:"green", label:"Giving Space", statement:"They give you space when you ask for it, without taking it personally.", why:"Needing time alone is normal. A good partner respects it instead of guilt-tripping you." },
+    { type:"green", label:"Accountability", statement:"After a fight, they apologize and actually change their behavior.", why:"Anyone can say sorry. It counts when the behavior really changes." },
+    { type:"green", label:"Genuine Support", statement:"They're truly happy for you when something good happens to you.", why:"A healthy partner celebrates your wins — they don't compete with you or downplay them." },
+    { type:"green", label:"Listening", statement:"When you bring up a problem, they listen instead of getting defensive.", why:"Being heard without it turning into a fight is a sign of real communication." },
+    { type:"green", label:"Privacy Respected", statement:"They keep what you share private, even after an argument.", why:"Trust means your secrets stay safe — they're never used against you later." },
+    { type:"green", label:"Caring Check-in", statement:"They text to see you got home safe — and are fine if you're busy.", why:"Caring check-ins come with freedom. The difference from control is whether \"I'm busy\" is okay." },
+    { type:"green", label:"Equality", statement:"You both make decisions together, and both opinions matter.", why:"Healthy relationships share power — no one person calls all the shots." },
+    // ---- core reds ----
+    { type:"red", label:"Pressure", statement:"They pressure you to do things you're uncomfortable with.", why:"Real care never pushes you past your own comfort." },
+    { type:"red", label:"Guilt", statement:"They make you feel guilty for saying \"no.\"", why:"If saying \"no\" comes with guilt-tripping, that's pressure dressed up as feelings." },
+    { type:"red", label:"Control", statement:"They constantly check your phone or social media.", why:"Checking your phone or accounts all the time isn't love — it's control." },
+    { type:"red", label:"Isolation", statement:"They try to isolate you from family or friends.", why:"Pulling you away from people who care about you is a warning sign, not closeness." },
+    { type:"red", label:"Responsibility", statement:"They make you feel responsible for their happiness.", why:"Your job is to be yourself — not to manage someone else's mood." },
+    { type:"red", label:"Insults & Manipulation", statement:"They use insults, threats, or manipulation.", why:"Insults and threats are never \"just how they talk.\" That's harm." },
+    { type:"red", label:"Boundary Violations", statement:"They don't respect your boundaries.", why:"A partner who keeps crossing your limits isn't listening to you." },
+    // ---- more reds (nuanced & situational) ----
+    { type:"red", label:"Jealousy", statement:"They get angry or jealous when you spend time with friends.", why:"Jealousy isn't proof of love — it's a way to control who you see." },
+    { type:"red", label:"Snooping", statement:"They go through your messages without asking.", why:"Reading your private messages breaks trust. Asking isn't the same as a right to know everything." },
+    { type:"red", label:"Silent Treatment", statement:"They give you the silent treatment until they get their way.", why:"Shutting you out as punishment is manipulation, not communication." },
+    { type:"red", label:"Keeping Score", statement:"They bring up your past mistakes to win every argument.", why:"Weaponizing the past keeps you on the defensive and never lets things heal." },
+    { type:"red", label:"\"If you loved me…\"", statement:"They say \"if you really loved me, you would…\"", why:"Love isn't a test you have to keep passing. That line is pressure in disguise." },
+    { type:"red", label:"Public Put-downs", statement:"They embarrass you in front of others and call it \"just a joke.\"", why:"If a \"joke\" always makes you the target and hurts, it's disrespect — not humor." },
+    { type:"red", label:"Mood Walking", statement:"Their mood decides whether your whole day goes well or badly.", why:"Constantly managing someone's mood to keep the peace is exhausting — and not your job." }
+  ];
+  // How many cards per round (drawn at random from the pool, so replays differ)
+  const ROUND_SIZE = 15;
+  const healthyTraits = [
+    ["Respect","values your opinions, feelings, and boundaries."],
+    ["Honest communication","you can talk openly without fear."],
+    ["Trust","you feel safe and don't have to constantly prove yourself."],
+    ["Support","encourages your goals, education, and dreams."],
+    ["Healthy boundaries","respects your right to say \"no.\""],
+    ["Kindness","treats you with care, even during disagreements."]
+  ];
+  const HEART = '<svg width="14" height="14" viewBox="0 0 24 24" fill="var(--green)" class="lh"><path d="M12 21C12 21 4 13.7 4 8.8 4 6.1 6.1 4 8.7 4 10.3 4 11.6 4.9 12 6.1 12.4 4.9 13.7 4 15.3 4 17.9 4 20 6.1 20 8.8 20 13.7 12 21 12 21Z"/></svg>';
+
+  // ---------------- THEME ----------------
+  const SUN = '<circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.6" y1="4.6" x2="6.4" y2="6.4"/><line x1="17.6" y1="17.6" x2="19.4" y2="19.4"/><line x1="4.6" y1="19.4" x2="6.4" y2="17.6"/><line x1="17.6" y1="6.4" x2="19.4" y2="4.6"/>';
+  const MOON = '<path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z" fill="currentColor" stroke="none"/>';
+  function applyTheme(theme){
+    document.documentElement.setAttribute('data-theme', theme);
+    document.getElementById('theme-icon').innerHTML = (theme === 'dark') ? SUN : MOON;
+    try{ localStorage.setItem('hr-theme', theme); }catch(e){}
+  }
+  function toggleTheme(){ const cur=document.documentElement.getAttribute('data-theme'); applyTheme(cur==='dark'?'light':'dark'); sfx('click'); }
+
+  // ---------------- SOUND ----------------
+  let soundOn = true, audioCtx = null;
+  function ac(){ if(!audioCtx){ try{ audioCtx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ audioCtx=null; } } if(audioCtx&&audioCtx.state==='suspended') audioCtx.resume(); return audioCtx; }
+  function tone(freq,start,dur,type,peak){ const ctx=ac(); if(!ctx) return; const t0=ctx.currentTime+start, osc=ctx.createOscillator(), g=ctx.createGain(); osc.type=type||'sine'; osc.frequency.setValueAtTime(freq,t0); g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(peak||0.18,t0+0.012); g.gain.exponentialRampToValueAtTime(0.0001,t0+dur); osc.connect(g); g.connect(ctx.destination); osc.start(t0); osc.stop(t0+dur+0.02); }
+  function sfx(name){ if(!soundOn) return;
+    if(name==='click'){ tone(440,0,0.08,'triangle',0.12); }
+    else if(name==='nav'){ tone(560,0,0.07,'sine',0.10); tone(760,0.05,0.09,'sine',0.09); }
+    else if(name==='correct'){ tone(659,0,0.12,'sine',0.16); tone(988,0.10,0.18,'sine',0.16); }
+    else if(name==='wrong'){ tone(200,0,0.16,'sawtooth',0.10); tone(150,0.08,0.22,'sawtooth',0.09); }
+    else if(name==='complete'){ [523,659,784,1046].forEach((f,i)=>tone(f,i*0.11,0.30,'sine',0.17)); }
+  }
+  const SOUND_ON='<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/>';
+  const SOUND_OFF='<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/>';
+  function toggleSound(){ soundOn=!soundOn; if(soundOn){ ac(); sfx('click'); } document.getElementById('sound-icon').innerHTML=soundOn?SOUND_ON:SOUND_OFF; try{ localStorage.setItem('hr-sound', soundOn?'on':'off'); }catch(e){} }
+
+  // ---------------- CONFETTI (hearts + squares) ----------------
+  const cf=document.getElementById('confetti'), cfx=cf.getContext('2d');
+  let cfParticles=[], cfRAF=null;
+  function sizeCanvas(){ cf.width=window.innerWidth; cf.height=window.innerHeight; }
+  window.addEventListener('resize', sizeCanvas); sizeCanvas();
+  function drawHeart(ctx,s){ ctx.beginPath(); ctx.moveTo(0,s*0.3); ctx.bezierCurveTo(-s*0.5,-s*0.3,-s*0.5,-s*0.9,0,-s*0.45); ctx.bezierCurveTo(s*0.5,-s*0.9,s*0.5,-s*0.3,0,s*0.3); ctx.closePath(); ctx.fill(); }
+  function burstConfetti(count, originY){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const colors=['#4ADE80','#FF8FB1','#FFD66B','#FFFFFF','#34D399','#FF6B6B'];
+    const cx=cf.width/2, cy=originY!=null?originY:cf.height*0.32;
+    for(let i=0;i<count;i++){ cfParticles.push({ x:cx+(Math.random()-0.5)*140, y:cy+(Math.random()-0.5)*40, vx:(Math.random()-0.5)*9, vy:Math.random()*-11-4, g:0.26+Math.random()*0.12, size:7+Math.random()*7, rot:Math.random()*Math.PI, vr:(Math.random()-0.5)*0.3, color:colors[Math.floor(Math.random()*colors.length)], heart:Math.random()<0.55, life:0 }); }
+    if(!cfRAF) cfRAF=requestAnimationFrame(stepConfetti);
+  }
+  function stepConfetti(){
+    cfx.clearRect(0,0,cf.width,cf.height);
+    cfParticles.forEach(p=>{ p.vy+=p.g; p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr; p.life++; cfx.save(); cfx.translate(p.x,p.y); cfx.rotate(p.rot); cfx.fillStyle=p.color; if(p.heart){ drawHeart(cfx,p.size); } else { cfx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6); } cfx.restore(); });
+    cfParticles=cfParticles.filter(p=>p.y<cf.height+30 && p.life<280);
+    if(cfParticles.length){ cfRAF=requestAnimationFrame(stepConfetti); } else { cfx.clearRect(0,0,cf.width,cf.height); cfRAF=null; }
+  }
+
+  // ---------------- FLOATING HEARTS BACKDROP ----------------
+  function buildFloatHearts(){
+    const el=document.getElementById('float-hearts');
+    const spots=[ [6,18,30,-12,0], [88,12,26,10,1.5], [14,72,22,8,0.7], [80,78,34,-8,2.2], [50,8,20,0,1.1], [92,48,18,14,0.4], [4,46,24,-6,3] ];
+    const cols=['var(--green)','var(--pink)','var(--gold)'];
+    let html='';
+    spots.forEach((s,i)=>{ html+=`<svg style="left:${s[0]}%; top:${s[1]}%; width:${s[2]}px; --r:${s[3]}deg; animation-delay:${s[4]}s" viewBox="0 0 24 24" fill="${cols[i%cols.length]}"><path d="M12 21C12 21 4 13.7 4 8.8 4 6.1 6.1 4 8.7 4 10.3 4 11.6 4.9 12 6.1 12.4 4.9 13.7 4 15.3 4 17.9 4 20 6.1 20 8.8 20 13.7 12 21 12 21Z"/></svg>`; });
+    el.innerHTML=html;
+  }
+
+  // ---------------- HELPERS ----------------
+  function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function buildFlagline(id,total,cur,done){ const el=document.getElementById(id); let html='<div class="pole-row"><div class="wire"></div>'; for(let i=0;i<total;i++){ const c=i===cur?'current':''; const d=done&&done[i]?('done '+done[i]):''; html+=`<div class="pennant-wrap ${c}"><div class="pennant-dot"></div><div class="pennant ${d}"></div></div>`; } html+='</div>'; el.innerHTML=html; }
+  function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  // ---------------- STUDENT NAME ----------------
+  let studentName = '';
+  function beginApp(){
+    const input=document.getElementById('student-name');
+    const val=(input.value||'').trim();
+    if(!val){
+      const f=document.querySelector('.name-field');
+      f.classList.remove('shake'); void f.offsetWidth; f.classList.add('shake');
+      document.getElementById('name-hint').textContent='Please type your name to start.';
+      input.focus(); sfx('wrong'); return;
+    }
+    studentName=val;
+    try{ localStorage.setItem('hr-name', studentName); }catch(e){}
+    document.getElementById('name-hint').textContent='';
+    goTo('home');
+  }
+  function updateGreeting(){
+    const el=document.getElementById('menu-greeting');
+    if(el) el.textContent = studentName ? `Hi, ${studentName}! 👋` : 'Choose an activity';
+  }
+
+  // ---------------- NAVIGATION ----------------
+  function goTo(screen){
+    sfx('nav');
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    if(screen==='intro'){ document.getElementById('screen-intro').classList.add('active'); }
+    else if(screen==='home'){ updateGreeting(); document.getElementById('screen-home').classList.add('active'); }
+    else if(screen==='survey'){ startSurvey(); document.getElementById('screen-survey').classList.add('active'); }
+    else if(screen==='flags'){ if(!flagOrder.length) startFlagGame(); document.getElementById('screen-flags').classList.add('active'); }
+    else if(screen==='myth'){ if(!mythOrder.length) startMyth(); document.getElementById('screen-myth').classList.add('active'); }
+    else if(screen==='boundary'){ if(!boundaryOrder.length) startBoundary(); document.getElementById('screen-boundary').classList.add('active'); }
+    else if(screen==='reflect'){ loadReflect(); document.getElementById('screen-reflect').classList.add('active'); }
+    window.scrollTo({top:0, behavior:'auto'});
+  }
+  function confirmExitFlags(){ goTo('home'); }
+
+  // ---------------- AFTER-CLASS REFLECTION ----------------
+  // NOTE: To collect responses in a Google Sheet later, paste your deployed
+  // Google Apps Script Web App URL below. When set, Save also POSTs the data.
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbztqMJZ1BtTpVavoXQpqDQyrCzCTlLrydKh9WtJJoRNddJ8UrXC0nXAMSf3jN0EiHfK7w/exec";
+
+  function loadReflect(){
+    try{
+      document.getElementById('reflect-learned').value = localStorage.getItem('hr-reflect-learned') || '';
+      document.getElementById('reflect-notes').value   = localStorage.getItem('hr-reflect-notes')   || '';
+    }catch(e){}
+    const saved = (function(){ try{ return !!(localStorage.getItem('hr-reflect-learned')||localStorage.getItem('hr-reflect-notes')); }catch(e){ return false; } })();
+    setReflectStatus(saved ? 'Saved on this device' : 'Not saved yet', saved);
+  }
+  function setReflectStatus(text, saved){
+    const el=document.getElementById('reflect-status');
+    el.textContent=text; el.classList.toggle('saved', !!saved);
+  }
+  // Save a private copy on this device only (does NOT send anywhere)
+  function saveReflect(){
+    sfx('click');
+    const learned=document.getElementById('reflect-learned').value.trim();
+    const notes=document.getElementById('reflect-notes').value.trim();
+    if(!learned && !notes){ setReflectStatus('Nothing to save yet', false); return; }
+    try{
+      localStorage.setItem('hr-reflect-learned', learned);
+      localStorage.setItem('hr-reflect-notes', notes);
+    }catch(e){}
+    setReflectStatus('Saved on this device', true);
+  }
+
+  // Submit to the teacher (sends to the Google Sheet) + saves locally + shows confirmation
+  function submitReflect(){
+    sfx('click');
+    const learned=document.getElementById('reflect-learned').value.trim();
+    const notes=document.getElementById('reflect-notes').value.trim();
+    if(!learned && !notes){ setReflectStatus('Write something first', false); return; }
+    try{
+      localStorage.setItem('hr-reflect-learned', learned);
+      localStorage.setItem('hr-reflect-notes', notes);
+    }catch(e){}
+    setReflectStatus('Submitted ✓', true);
+    sendToAppsScript(learned, notes); // posts to APPS_SCRIPT_URL if set
+    const recap=document.getElementById('reflect-recap');
+    recap.innerHTML =
+      `<li><span class="recap-q">What I learned today</span><span class="recap-a ${learned?'':'empty'}">${learned?escapeHtml(learned):'(left blank)'}</span></li>` +
+      `<li><span class="recap-q">My notes</span><span class="recap-a ${notes?'':'empty'}">${notes?escapeHtml(notes):'(left blank)'}</span></li>`;
+    document.getElementById('reflect-end-title').textContent = 'Submitted! 🎉';
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById('screen-reflect-end').classList.add('active');
+    sfx('complete'); burstConfetti(130); window.scrollTo({top:0});
+  }
+  function clearReflect(){
+    sfx('click');
+    document.getElementById('reflect-learned').value='';
+    document.getElementById('reflect-notes').value='';
+    try{ localStorage.removeItem('hr-reflect-learned'); localStorage.removeItem('hr-reflect-notes'); }catch(e){}
+    setReflectStatus('Cleared', false);
+    document.getElementById('reflect-learned').focus();
+  }
+  function downloadReflect(){
+    sfx('click');
+    const learned=document.getElementById('reflect-learned').value.trim();
+    const notes=document.getElementById('reflect-notes').value.trim();
+    const d=new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
+    const text=`Healthy Relationships — My Reflection\n`+
+      (studentName?`Name: ${studentName}\n`:'')+
+      `${d}\n\n`+
+      `WHAT I LEARNED TODAY\n${learned||'(left blank)'}\n\n`+
+      `MY NOTES\n${notes||'(left blank)'}\n`;
+    const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='healthy-relationships-reflection.txt';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+  }
+  function postToSheet(payload){
+    if(!APPS_SCRIPT_URL) return; // not configured yet
+    try{
+      fetch(APPS_SCRIPT_URL, {
+        method:'POST',
+        mode:'no-cors',
+        headers:{ 'Content-Type':'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+    }catch(e){}
+  }
+  function sendToAppsScript(learned, notes){
+    postToSheet({ type:'reflection', name:studentName, learned:learned, notes:notes, ts:new Date().toISOString() });
+  }
+  function submitWarmup(){
+    sfx('click');
+    const questions = surveyQuestions.map(q=>q.q);
+    const answers = surveyAnswers.map(a=>a||'');
+    postToSheet({ type:'warmup', name:studentName, questions:questions, answers:answers, ts:new Date().toISOString() });
+    const btn=document.getElementById('warmup-submit-btn');
+    if(btn){ btn.textContent='Submitted ✓'; btn.disabled=true; }
+    const status=document.getElementById('warmup-status');
+    if(status){ status.textContent='Thanks! Your warm-up answers were sent to your teacher.'; status.style.color='var(--accent)'; }
+    sfx('complete'); burstConfetti(110);
+  }
+
+  // ---------------- SURVEY ----------------
+  let surveyIndex=0, surveyAnswers=[];
+  function startSurvey(){ surveyIndex=0; surveyAnswers=new Array(surveyQuestions.length).fill(''); renderSurvey(); }
+  function renderSurvey(){
+    const item=surveyQuestions[surveyIndex];
+    document.getElementById('survey-eyebrow').textContent=`QUESTION ${surveyIndex+1} OF ${surveyQuestions.length}`;
+    document.getElementById('survey-question').textContent=item.q;
+    document.getElementById('survey-input').value=surveyAnswers[surveyIndex]||'';
+    document.getElementById('survey-input').placeholder=item.ph||'Type your answer here...';
+    document.getElementById('survey-counter').textContent=`${surveyIndex+1} / ${surveyQuestions.length}`;
+    document.getElementById('survey-back-btn').style.visibility=surveyIndex===0?'hidden':'visible';
+    document.getElementById('survey-next-btn').textContent=(surveyIndex===surveyQuestions.length-1)?'Finish':'Next';
+    buildFlagline('survey-flagline',surveyQuestions.length,surveyIndex,surveyAnswers.map((a,i)=>i<surveyIndex?'neutral':null));
+    document.getElementById('survey-input').focus();
+  }
+  function stashSurveyAnswer(){ surveyAnswers[surveyIndex]=document.getElementById('survey-input').value.trim(); }
+  function surveyNext(){ sfx('click'); stashSurveyAnswer(); if(surveyIndex<surveyQuestions.length-1){ surveyIndex++; renderSurvey(); } else { finishSurvey(); } }
+  function surveySkip(){ surveyAnswers[surveyIndex]=surveyAnswers[surveyIndex]||''; surveyNext(); }
+  function surveyBack(){ sfx('click'); stashSurveyAnswer(); if(surveyIndex>0){ surveyIndex--; renderSurvey(); } }
+  function finishSurvey(){
+    const recap=document.getElementById('survey-recap'); recap.innerHTML='';
+    surveyQuestions.forEach((item,i)=>{ const ans=surveyAnswers[i]; const li=document.createElement('li'); li.innerHTML=`<span class="recap-q">${escapeHtml(item.q)}</span><span class="recap-a ${ans?'':'empty'}">${ans?escapeHtml(ans):'skipped'}</span>`; recap.appendChild(li); });
+    const wbtn=document.getElementById('warmup-submit-btn');
+    if(wbtn){ wbtn.disabled=false; wbtn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg> Submit to teacher'; }
+    const wstatus=document.getElementById('warmup-status');
+    if(wstatus){ wstatus.textContent='Tap “Submit” to send your warm-up answers to your teacher.'; wstatus.style.color=''; }
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById('screen-survey-end').classList.add('active');
+    sfx('complete'); burstConfetti(120); window.scrollTo({top:0});
+  }
+
+  // ---------------- FLAG GAME ----------------
+  let flagOrder=[], flagIndex=0, flagScore=0, flagAnswered=false, flagStreak=0, flagBestStreak=0;
+  function startFlagGame(){
+    const n=Math.min(ROUND_SIZE, flagItemsBase.length);
+    flagOrder=shuffle(flagItemsBase).slice(0, n);
+    flagIndex=0; flagScore=0; flagStreak=0; flagBestStreak=0;
+    renderFlagCard();
+  }
+  function streakTag(){ return flagStreak>=2 ? `  ·  🔥 ${flagStreak}` : ''; }
+  function renderFlagCard(){
+    flagAnswered=false; const item=flagOrder[flagIndex];
+    document.getElementById('flags-eyebrow').textContent=`CARD ${flagIndex+1} OF ${flagOrder.length}`;
+    document.getElementById('flag-statement').textContent=item.statement;
+    document.getElementById('flags-counter').textContent=`Score: ${flagScore} / ${flagIndex}${streakTag()}`;
+    document.getElementById('flag-feedback').classList.remove('show','correct','incorrect');
+    document.querySelectorAll('.flag-choice').forEach(b=>{ b.disabled=false; b.classList.remove('chosen'); });
+    buildFlagline('flags-flagline',flagOrder.length,flagIndex,flagOrder.map((f,i)=>i<flagIndex?f.type:null));
+  }
+  function answerFlag(choice){
+    if(flagAnswered) return; flagAnswered=true;
+    const item=flagOrder[flagIndex], correct=choice===item.type;
+    if(correct){ flagScore++; flagStreak++; if(flagStreak>flagBestStreak) flagBestStreak=flagStreak; }
+    else { flagStreak=0; }
+    document.querySelectorAll('.flag-choice').forEach(b=>{ b.disabled=true; if(b.getAttribute('data-choice')===choice) b.classList.add('chosen'); });
+    const fb=document.getElementById('flag-feedback'); fb.classList.add('show', correct?'correct':'incorrect');
+    const labelWord=item.type==='green'?'Green Flag':'Red Flag';
+    let head=(correct?'✓ ':'✕ ')+`This is a ${labelWord}: ${item.label}`;
+    if(correct && flagStreak>=3) head += `   🔥 ${flagStreak} in a row!`;
+    document.getElementById('fb-title').textContent=head;
+    document.getElementById('fb-why').textContent=item.why;
+    document.getElementById('flags-counter').textContent=`Score: ${flagScore} / ${flagIndex+1}${streakTag()}`;
+    document.getElementById('flag-next-btn').textContent=(flagIndex===flagOrder.length-1)?'See results':'Next card';
+    if(correct){ sfx('correct'); burstConfetti(flagStreak>=3?48:28, window.innerHeight*0.42); } else { sfx('wrong'); }
+  }
+  function nextFlag(){ sfx('click'); if(flagIndex<flagOrder.length-1){ flagIndex++; renderFlagCard(); } else { finishFlagGame(); } }
+  function finishFlagGame(){
+    const total=flagOrder.length, pct=Math.round((flagScore/total)*100);
+    const streakLine = flagBestStreak>=3 ? `  ·  Best streak 🔥 ${flagBestStreak}` : '';
+    document.getElementById('flags-end-score').textContent=`You spotted ${flagScore} out of ${total} correctly.${streakLine}`;
+    let title="All cards sorted.";
+    if(pct===100) title="Perfect score! 🏆"; else if(pct>=75) title="Great eye! 🌟"; else if(pct>=50) title="Nice work — keep practicing."; else title="Good start — try again!";
+    document.getElementById('flags-end-title').textContent=title;
+    const ring=document.getElementById('score-ring'), r=52, c=2*Math.PI*r, off=c*(1-flagScore/total);
+    ring.innerHTML=`<svg width="132" height="132" viewBox="0 0 132 132"><circle cx="66" cy="66" r="${r}" fill="none" stroke="var(--line)" stroke-width="12"/><circle cx="66" cy="66" r="${r}" fill="none" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c}" transform="rotate(-90 66 66)" id="ring-fg"/><text x="66" y="60" text-anchor="middle" class="ring-num" font-size="30" fill="var(--ink)">${flagScore}</text><text x="66" y="82" text-anchor="middle" font-size="13" fill="var(--ink-soft)" font-family="Plus Jakarta Sans">of ${total}</text></svg>`;
+    requestAnimationFrame(()=>{ const fg=document.getElementById('ring-fg'); if(fg){ fg.style.transition='stroke-dashoffset 0.9s cubic-bezier(.2,.8,.2,1)'; fg.style.strokeDashoffset=off; } });
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById('screen-flags-end').classList.add('active');
+    sfx('complete'); burstConfetti(pct>=75?160:90); window.scrollTo({top:0});
+  }
+
+  // ================= MYTH OR FACT =================
+  const mythItems = [
+    { a:'myth', s:"You can't get pregnant the first time.", w:"Pregnancy is possible any time — including the very first time." },
+    { a:'myth', s:"Preventing pregnancy is only the girl's job.", w:"Both partners share responsibility for decisions and protection." },
+    { a:'fact', s:"Consent can be taken back at any time.", w:"Anyone can change their mind at any point — and that has to be respected." },
+    { a:'myth', s:"If someone doesn't say \"no,\" it counts as a yes.", w:"Silence isn't consent. Consent is a clear, freely-given yes." },
+    { a:'fact', s:"Condoms can lower the risk of both pregnancy and many STIs.", w:"Used correctly, they reduce both risks — which is why they're recommended." },
+    { a:'myth', s:"Jealousy proves how much someone loves you.", w:"Jealousy is about control, not love. Trust is the real sign of care." },
+    { a:'fact', s:"Healthy couples can disagree and still respect each other.", w:"Disagreeing is normal — doing it with respect is what keeps it healthy." },
+    { a:'myth', s:"Real love means never wanting time apart.", w:"Time with friends, family, and yourself is healthy. Space isn't a lack of love." },
+    { a:'fact', s:"Abstinence is the only 100% effective way to prevent pregnancy.", w:"No other method is 100%, though several are highly effective when used correctly." },
+    { a:'myth', s:"You have to be in a relationship to be happy or complete.", w:"Your worth doesn't depend on having a partner." },
+    { a:'fact', s:"You can change your mind about anything physical, anytime.", w:"You can always say stop — your comfort comes first, no explanation owed." },
+    { a:'myth', s:"\"Pulling out\" is a reliable way to prevent pregnancy.", w:"It's one of the least reliable methods — pregnancy can still happen." }
+  ];
+  let mythOrder=[], mythIndex=0, mythScore=0, mythAnswered=false;
+  function startMyth(){ mythOrder=shuffle(mythItems); mythIndex=0; mythScore=0; renderMyth(); }
+  function renderMyth(){
+    mythAnswered=false; const item=mythOrder[mythIndex];
+    document.getElementById('myth-eyebrow').textContent=`CARD ${mythIndex+1} OF ${mythOrder.length}`;
+    document.getElementById('myth-statement').textContent=item.s;
+    document.getElementById('myth-counter').textContent=`Score: ${mythScore} / ${mythIndex}`;
+    document.getElementById('myth-feedback').classList.remove('show','correct','incorrect');
+    document.querySelectorAll('#myth-choices .choice').forEach(b=>{ b.disabled=false; b.classList.remove('pick'); });
+    buildFlagline('myth-flagline',mythOrder.length,mythIndex,mythOrder.map((f,i)=>i<mythIndex?'neutral':null));
+  }
+  function answerMyth(choice){
+    if(mythAnswered) return; mythAnswered=true;
+    const item=mythOrder[mythIndex], correct=choice===item.a;
+    if(correct) mythScore++;
+    document.querySelectorAll('#myth-choices .choice').forEach(b=>{ b.disabled=true; if(b.getAttribute('data-choice')===choice) b.classList.add('pick'); });
+    const fb=document.getElementById('myth-feedback'); fb.classList.add('show', correct?'correct':'incorrect');
+    const real=item.a==='fact'?'Fact':'Myth';
+    document.getElementById('myth-fb-title').textContent=(correct?'✓ Correct — ':'✕ Actually — ')+`it's a ${real}.`;
+    document.getElementById('myth-fb-why').textContent=item.w;
+    document.getElementById('myth-counter').textContent=`Score: ${mythScore} / ${mythIndex+1}`;
+    document.getElementById('myth-next-btn').textContent=(mythIndex===mythOrder.length-1)?'See results':'Next';
+    if(correct){ sfx('correct'); burstConfetti(28, window.innerHeight*0.42); } else { sfx('wrong'); }
+  }
+  function nextMyth(){ sfx('click'); if(mythIndex<mythOrder.length-1){ mythIndex++; renderMyth(); } else { finishMyth(); } }
+  function finishMyth(){
+    const total=mythOrder.length, pct=Math.round((mythScore/total)*100);
+    document.getElementById('myth-end-score').textContent=`You got ${mythScore} out of ${total} right.`;
+    let title="Round complete.";
+    if(pct===100) title="Myth-buster! 🏆"; else if(pct>=75) title="Sharp thinking! 🌟"; else if(pct>=50) title="Nice — now you know."; else title="Now you know! Try again.";
+    document.getElementById('myth-end-title').textContent=title;
+    const ring=document.getElementById('myth-ring'), r=52, c=2*Math.PI*r, off=c*(1-mythScore/total);
+    ring.innerHTML=`<svg width="132" height="132" viewBox="0 0 132 132"><circle cx="66" cy="66" r="${r}" fill="none" stroke="var(--line)" stroke-width="12"/><circle cx="66" cy="66" r="${r}" fill="none" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c}" transform="rotate(-90 66 66)" id="myth-ring-fg"/><text x="66" y="60" text-anchor="middle" class="ring-num" font-size="30" fill="var(--ink)">${mythScore}</text><text x="66" y="82" text-anchor="middle" font-size="13" fill="var(--ink-soft)" font-family="Plus Jakarta Sans">of ${total}</text></svg>`;
+    requestAnimationFrame(()=>{ const fg=document.getElementById('myth-ring-fg'); if(fg){ fg.style.transition='stroke-dashoffset 0.9s cubic-bezier(.2,.8,.2,1)'; fg.style.strokeDashoffset=off; } });
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById('screen-myth-end').classList.add('active');
+    sfx('complete'); burstConfetti(pct>=75?150:90); window.scrollTo({top:0});
+  }
+
+  // ================= BOUNDARY SORT =================
+  const boundaryItems = [
+    { s:"A friend wants to hug you hello every time you meet.", note:"Physical comfort levels are personal — it's completely fine to prefer a wave instead." },
+    { s:"Your partner wants to text constantly throughout the day.", note:"Some people love it, some need quiet. A healthy partner is fine with your pace." },
+    { s:"Someone asks to borrow money you'd rather not lend.", note:"\"No\" is a complete answer. You never owe anyone access to your money." },
+    { s:"A person keeps asking you out after you've already said no.", note:"However you feel about them — once you've said no, it should be respected. Repeated pressure is a red flag." },
+    { s:"Your partner suggests sharing each other's phone passwords.", note:"Privacy is normal and healthy. Sharing — or not — should be a free choice, never a demand." },
+    { s:"A friend posts a photo of you online without asking first.", note:"You get a say over your own image. Asking first is basic respect." },
+    { s:"Someone wants to know where you are at all times.", note:"Caring check-ins are fine; needing to track you constantly is about control, not love." },
+    { s:"A classmate asks to copy your homework.", note:"It's okay to protect your time and your work. Saying no doesn't make you a bad friend." },
+    { s:"A partner wants to spend every single weekend together.", note:"Closeness is great — and so is keeping your own friends and space. Balance is healthy." },
+    { s:"Someone pressures you to do something physical you're unsure about.", note:"If you're unsure, \"not now\" is always valid — and no one should ever pressure you past it." }
+  ];
+  let boundaryOrder=[], boundaryIndex=0, boundaryAnswered=false;
+  function startBoundary(){ boundaryOrder=shuffle(boundaryItems); boundaryIndex=0; renderBoundary(); }
+  function renderBoundary(){
+    boundaryAnswered=false; const item=boundaryOrder[boundaryIndex];
+    document.getElementById('boundary-eyebrow').textContent=`SITUATION ${boundaryIndex+1} OF ${boundaryOrder.length}`;
+    document.getElementById('boundary-statement').textContent=item.s;
+    document.getElementById('boundary-counter').textContent=`${boundaryIndex+1} / ${boundaryOrder.length}`;
+    document.getElementById('boundary-feedback').classList.remove('show');
+    document.querySelectorAll('#boundary-choices .choice').forEach(b=>{ b.disabled=false; b.classList.remove('pick'); });
+    buildFlagline('boundary-flagline',boundaryOrder.length,boundaryIndex,boundaryOrder.map((f,i)=>i<boundaryIndex?'neutral':null));
+  }
+  function chooseBoundary(choice){
+    if(boundaryAnswered) return; boundaryAnswered=true;
+    const item=boundaryOrder[boundaryIndex];
+    document.querySelectorAll('#boundary-choices .choice').forEach(b=>{ b.disabled=true; if(b.getAttribute('data-choice')===choice) b.classList.add('pick'); });
+    const fb=document.getElementById('boundary-feedback'); fb.classList.remove('correct','incorrect'); fb.classList.add('show','neutral');
+    const head = choice==='ok' ? "Good to know your comfort zone 👍" : choice==='no' ? "You'd set a limit here — that's allowed 🚫" : "Your call — and that's exactly the point 🤔";
+    document.getElementById('boundary-fb-title').textContent=head;
+    document.getElementById('boundary-fb-why').textContent=item.note;
+    document.getElementById('boundary-next-btn').textContent=(boundaryIndex===boundaryOrder.length-1)?'Finish':'Next';
+    sfx('correct');
+  }
+  function nextBoundary(){ sfx('click'); if(boundaryIndex<boundaryOrder.length-1){ boundaryIndex++; renderBoundary(); } else { finishBoundary(); } }
+  function finishBoundary(){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById('screen-boundary-end').classList.add('active');
+    sfx('complete'); burstConfetti(110); window.scrollTo({top:0});
+  }
+
+  // ---------------- INIT ----------------
+  (function init(){
+    let theme='dark'; try{ theme=localStorage.getItem('hr-theme')||'dark'; }catch(e){}
+    applyTheme(theme);
+    try{ if(localStorage.getItem('hr-sound')==='off'){ soundOn=false; } }catch(e){}
+    document.getElementById('sound-icon').innerHTML = soundOn ? SOUND_ON : SOUND_OFF;
+    buildFloatHearts();
+    document.getElementById('recap-ul').innerHTML = healthyTraits.map(t=>`<li>${HEART}<span><b>${t[0]}</b> — ${t[1]}</span></li>`).join('');
+    try{ const savedName=localStorage.getItem('hr-name'); if(savedName){ studentName=savedName; document.getElementById('student-name').value=savedName; } }catch(e){}
+    document.getElementById('student-name').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); beginApp(); } });
+    document.getElementById('survey-input').addEventListener('keydown', function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); surveyNext(); } });
+    document.addEventListener('pointerdown', function once(){ ac(); document.removeEventListener('pointerdown', once); }, { once:true });
+  })();
+</script>
+
+</body>
+</html>
